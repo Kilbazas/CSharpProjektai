@@ -28,9 +28,7 @@ namespace PersonalNumberChecker
                 {
                     Console.WriteLine("Tavo asmens kodas yra: " + personalNumber);
                     break;
-                }
-                    
-                
+                }   
             }
                 
         }
