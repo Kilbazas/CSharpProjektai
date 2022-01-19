@@ -136,9 +136,12 @@ def is_person_isnt_too_young(person_code_param):
     result = False
     input_first_number = person_code_param[0]
     birth_date = get_birth_date_from_personal_code(person_code_param)
+    if input_first_number == '1' or input_first_number == '2':
+        year = "18" + str(birth_date[0:2])
+    if input_first_number == '3' or input_first_number == '4':
+        year = "19" + str(birth_date[0:2])
     if input_first_number == '5' or input_first_number == '6':
         year = "20" + str(birth_date[0:2])
-        return year
     year = int(year)
     if year < 2023:
         result = True
