@@ -9,21 +9,27 @@
     # 5. verify leaf year
     # 6. verify month
     # 7. verify day
+    # 8. verify last number
 
 
 
 def read_personal_code():
-    # write your implementation here
     person_code = input("What is your personal code? ")
     return person_code
 
+def personal_code_lenght_checker(person_code_param):
+    result = False
+    if len(person_code_param) == 11:
+        result = True
+    return result
+
 def is_entered_personal_code_is_woman_or_man(person_code_param):
     result = 0 # 0 - man, 1 - woman, 2 - wrong
-    if person_code_param[0] == '3': 
+    if person_code_param[0] == '1' or person_code_param[0] == '3' or person_code_param[0] == '5' : 
         result = 0
-    if person_code_param[0] == '4':
+    if person_code_param[0] == '2' or person_code_param[0] == '4' or person_code_param[0] == '6':
         result = 1
-    if (person_code_param[0] != '3' and person_code_param[0] != "4"):  # this code is wrong 
+    if (person_code_param[0] != '1' and person_code_param[0] != '3' and person_code_param[0] != '5' and person_code_param[0] != '2' and person_code_param[0] != '4' and person_code_param[0] != '6'):  # this code is wrong 
         result = 2
     return result
 
@@ -31,7 +37,7 @@ def is_entered_personal_code_is_number(person_code_param):
     result = True
     n = len(person_code_param)
     for x in range(n):
-        if(ord(person_code_param[x]) < 48 or ord(person_code_param[x]) > 57): # we need to read how to make it more beautiful in Python
+        if(ord(person_code_param[x]) < 48 or ord(person_code_param[x]) > 57): 
             result = False
             break
     return result
@@ -41,8 +47,14 @@ def get_birth_date_from_personal_code(person_code_param):
 
 def is_entered_personal_code_is_leaf_year(person_code_param):
     result = False
+    input_first_number = person_code_param[0]
     birth_date = get_birth_date_from_personal_code(person_code_param)
-    year = "19"+ str(birth_date[0:2])
+    if input_first_number == '1' or input_first_number == '2':
+        year = "18" + str(birth_date[0:2])
+    if input_first_number == '3' or input_first_number == '4':
+        year = "19" + str(birth_date[0:2])
+    if input_first_number == '5' or input_first_number == '6':
+        year = "20" + str(birth_date[0:2])
     year = int(year)
     if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0):
         result = True
@@ -53,11 +65,10 @@ def is_entered_personal_code_month_is_in_range(person_code_param):
     birth_date = get_birth_date_from_personal_code(person_code_param)
     # implementation goes here
     month = person_code_param[3:5]
-    print(month)
     month = int(month)
     if 0 < month < 13:
-        result = True  # you do have birth_date 851221 - 12 is your month
-    return result # should return true if in range from 1 to 12? Yes
+        result = True  
+    return result 
 
 def is_entered_personal_code_day_is_in_range(person_code_param):
     result = False  
@@ -68,8 +79,7 @@ def is_entered_personal_code_day_is_in_range(person_code_param):
     
     days = person_code_param[5:7]
     days = int(days)
-    print(days)
-    month = person_code_param[3:5] #   person_code_param[3:5] - 1 ? True. Good
+    month = person_code_param[3:5] 
     
     month = int(month)
     if is_entered_personal_code_is_leaf_year(person_code_param) == True:
@@ -78,21 +88,77 @@ def is_entered_personal_code_day_is_in_range(person_code_param):
     if days <= days_in_month_list[month - 1]:
         result = True 
     return result
+
+def is_last_number_of_personal_code_is_legit(person_code_param):
+    result = False
+    input_last_number = person_code_param
+    last_number = ((int(input_last_number[0]) * 1 + int(input_last_number[1]) * 2 + int(input_last_number[2]) * 3 + int(input_last_number[3]) * 4 + int(input_last_number[4]) * 5 +
+                  int(input_last_number[5]) * 6 + int(input_last_number[6]) * 7 + int(input_last_number[7]) * 8 + int(input_last_number[8]) * 9 + int(input_last_number[9]) * 1)  % 11)
+    if last_number == 10:
+        last_number = ((int(input_last_number[0]) * 3 + int(input_last_number[1]) * 4 + int(input_last_number[2]) * 5 + int(input_last_number[3]) * 6 + int(input_last_number[4]) * 7 
+                       + int(input_last_number[5]) * 8 + int(input_last_number[6]) * 9 + int(input_last_number[7]) * 1 + int(input_last_number[8]) * 2 + int(input_last_number[9]) * 3) % 11)
+        if last_number == 10:
+            last_number = 0     
+    if int(input_last_number[10]) == last_number:
+        result = True
+    return result 
+
+def is_last_number_is_exeption_for_no_birth_date(person_code_param):
+    result = False
+    birth_date = get_birth_date_from_personal_code(person_code_param)
+    if birth_date[2:4] == "00" or birth_date[4:6] == "00":
+        result = True
+    return result
+
+def is_last_number_is_exeptional(person_code_param):
+    result = False
+    input_first_number = person_code_param[0]
+    if input_first_number == '9':
+        result = True
+    return result
+
+def is_person_isnt_too_old(person_code_param):
+    result = False
+    input_first_number = person_code_param[0]
+    birth_date = get_birth_date_from_personal_code(person_code_param)
+    if input_first_number == '1' or input_first_number == '2':
+        year = "18" + str(birth_date[0:2])
+    if input_first_number == '3' or input_first_number == '4':
+        year = "19" + str(birth_date[0:2])
+    if input_first_number == '5' or input_first_number == '6':
+        year = "20" + str(birth_date[0:2])
+    year = int(year)
+    if int(year) > 1890:
+        result = True
+    return result
+        
+
+    
+
+
+
+
+
 #unit tests
 
 personal_code = read_personal_code()
 
+if(personal_code_lenght_checker(personal_code) == False):
+    print("Blogas kodo ilgis")
+else:
+    print("Asmens kodas tinkamo ilgio")
+
 if(is_entered_personal_code_is_woman_or_man(personal_code) == 1):
-    print("Woman")
+    print("Person is woman")
     
 if(is_entered_personal_code_is_woman_or_man(personal_code) == 0):
-    print("Man")
+    print("Person is Man")
 
 if(is_entered_personal_code_is_woman_or_man(personal_code) == 2):
     print("Wrong")
 
 if(is_entered_personal_code_is_number(personal_code)):
-    print("Number")
+    print("Personal code is number")
 
 if(is_entered_personal_code_is_number(personal_code) !=  True):
     print("Wrong its not number")
@@ -106,5 +172,19 @@ if(is_entered_personal_code_day_is_in_range(personal_code) == True):
     print("Entered personal code day is in range")
 else:
     print("Entered personal code day is not in range")
-
-    
+if(is_last_number_of_personal_code_is_legit(personal_code) == True):
+    print("last number is legit")
+else:
+    print("last number is not legit")
+if(is_last_number_is_exeption_for_no_birth_date(personal_code) == True):
+    print("Personal number has an exeption")
+else:
+    print("There is no exeptions")
+if(is_last_number_is_exeptional(personal_code) == True):
+    print("Personal code is exeptional")
+else:
+    print("Personal code is regular")
+if(is_person_isnt_too_old(personal_code) == True):
+    print("Person isn't too old")
+else:
+    print("Person is too old")
