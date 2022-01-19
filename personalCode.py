@@ -128,14 +128,21 @@ def is_person_isnt_too_old(person_code_param):
     if input_first_number == '5' or input_first_number == '6':
         year = "20" + str(birth_date[0:2])
     year = int(year)
-    if int(year) > 1890:
+    if year > 1890:
         result = True
     return result
-        
 
-    
-
-
+def is_person_isnt_too_young(person_code_param):
+    result = False
+    input_first_number = person_code_param[0]
+    birth_date = get_birth_date_from_personal_code(person_code_param)
+    if input_first_number == '5' or input_first_number == '6':
+        year = "20" + str(birth_date[0:2])
+        return year
+    year = int(year)
+    if year < 2023:
+        result = True
+    return result
 
 
 
@@ -144,9 +151,9 @@ def is_person_isnt_too_old(person_code_param):
 personal_code = read_personal_code()
 
 if(personal_code_lenght_checker(personal_code) == False):
-    print("Blogas kodo ilgis")
+    print("Personal code is too short or too long")
 else:
-    print("Asmens kodas tinkamo ilgio")
+    print("Personal code is from 11 digits")
 
 if(is_entered_personal_code_is_woman_or_man(personal_code) == 1):
     print("Person is woman")
@@ -188,3 +195,7 @@ if(is_person_isnt_too_old(personal_code) == True):
     print("Person isn't too old")
 else:
     print("Person is too old")
+if(is_person_isnt_too_young(personal_code) == True):
+    print("Person isn't too young")
+else:
+    print("Person is too young")
