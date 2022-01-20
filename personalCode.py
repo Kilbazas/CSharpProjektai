@@ -63,7 +63,6 @@ def is_entered_personal_code_is_leaf_year(person_code_param):
 def is_entered_personal_code_month_is_in_range(person_code_param):
     result = False  
     birth_date = get_birth_date_from_personal_code(person_code_param)
-    # implementation goes here
     month = person_code_param[3:5]
     month = int(month)
     if 0 < month < 13:
@@ -73,7 +72,6 @@ def is_entered_personal_code_month_is_in_range(person_code_param):
 def is_entered_personal_code_day_is_in_range(person_code_param):
     result = False  
     birth_date = get_birth_date_from_personal_code(person_code_param)
-    # implementation goes here
     days_in_month_list_leaf = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     days_in_month_list = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     
@@ -149,7 +147,7 @@ def is_person_isnt_too_young(person_code_param):
 
 
 
-#unit tests
+#tests
 
 personal_code = read_personal_code()
 
