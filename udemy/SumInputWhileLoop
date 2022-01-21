@@ -1,0 +1,24 @@
+using System;
+
+namespace Udemy
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var sum = 0;
+
+            while (true)
+            {
+                Console.Write("Enter a number (Write ok to break it): ");
+                var input = Console.ReadLine();
+
+                if (input.ToLower() == "ok")
+                    break;
+
+                sum += Int32.Parse(input);
+            }
+            Console.WriteLine("sum is: " + sum);
+        }
+    }
+}
