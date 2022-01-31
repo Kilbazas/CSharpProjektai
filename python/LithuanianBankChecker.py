@@ -119,6 +119,8 @@ def return_bank_name(iban_param):
 def verify_iban_number(iban):
     if iban == None:
         return "Input can't be empty."
+    if iban == "":
+        return "Input can't be empty"
     
     iban = str(iban)
     iban = "".join(iban.split()).upper()
