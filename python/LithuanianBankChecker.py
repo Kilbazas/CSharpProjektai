@@ -63,16 +63,16 @@ def iban_to_number(iban_param):
             value = char_symbol.get(iban_check_code[char])
             iban_check_code[char] = value 
     for i in range(len(iban_check_code)):
-        new_iban_string = new_iban_string + str(iban_check_code[i])
+        new_iban_string = new_iban_string + iban_check_code[i]
     return new_iban_string
 
 def is_iban_check_numbers_valid(iban_param):
     result = False
-    iban_as_number = iban_to_number(iban_param)
-    iban_control_numbers = (98 - (int(iban_as_number) % 97))
+    iban_as_number = int(iban_to_number(iban_param))
+    iban_control_numbers = ((98 - iban_as_number) % 97)
     if iban_control_numbers < 10:
         iban_control_numbers = '0'+ str(iban_control_numbers)
-    if int(iban_control_numbers) == int(iban_param[2:4]):
+    if int(iban_control_numbers) == iban_param[2:4]:
         result = True
     return result
 
@@ -122,8 +122,6 @@ def verify_iban_number(iban):
         return "Iban check numbers are invalid."
     if is_iban_valid_mod_formula(iban) == False:
         return "Iban is invalid. It didn't pass mod97 algorithm."
-    if is_iban_lithuanian(iban) == False:
-        return "Iban is invalid. It is not Lithuanian bank account."
     if is_bank_code_valid(iban) == False:
         return "Iban is invalid. There is no bank in Lithuania with this bank code."
     return "valid"
