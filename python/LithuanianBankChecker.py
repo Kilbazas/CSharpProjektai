@@ -155,6 +155,8 @@ if verify_iban_number("LT321321321212123121313132313") == "valid":
     print("Something is wrong. Iban number is too long.")
 if verify_iban_number("XS557300010000000036") == "valid":
     print("Something is wrong. Iban number has unexpected symbols.")
+if verify_iban_number("LT5573000100000000,6") == "valid":
+    print("Something is wrong. Iban has unexpected symbols.")
 if verify_iban_number("LT55730A010000000036") == "valid":
     print("Something is wrong. Iban number has unexpected symbols.")
 if verify_iban_number("LT507300010000000036") == "Valid":
