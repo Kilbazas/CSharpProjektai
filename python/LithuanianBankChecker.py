@@ -12,6 +12,7 @@
 def read_iban_number():
     iban_number = input("What is your account number? ")
     iban_number = "".join(iban_number.split())
+    iban_number = iban_number.upper()
     return iban_number
 
 def iban_number_lenght_checker(iban_param):
@@ -30,6 +31,50 @@ def iban_symbols_validation(iban_param):
             break
     if chars != "LT":
         result = False
+    return result
+
+def is_iban_check_numbers_valid(iban_param):
+    result = False
+    char_symbol = {'A':'10',
+                   'B':'11',
+                   'C':'12',
+                   'D':'13',
+                   'E':'14',
+                   'F':'15',
+                   'G':'16',
+                   'H':'17',
+                   'I':'18',
+                   'J':'19',
+                   'K':'20',
+                   'L':'21',
+                   'M':'22',
+                   'N':'23',
+                   'O':'24',
+                   'P':'25',
+                   'Q':'26',
+                   'R':'27',
+                   'S':'28',
+                   'T':'29',
+                   'U':'30',
+                   'V':'31',
+                   'W':'32',
+                   'X':'33',
+                   'Y':'34',
+                   'Z':'35',
+                   }             
+    iban_check_code = iban_param[4:] + iban_param[0:2] + '00'
+    iban_check_code = list(iban_check_code)
+    new_iban_string = ""
+    for char in range(len(iban_check_code)):
+        if iban_check_code[char] in char_symbol:
+            value = char_symbol.get(iban_check_code[char])
+            iban_check_code[char] = value 
+    for i in range(len(iban_check_code)):
+        new_iban_string = new_iban_string + str(iban_check_code[i])
+
+    iban_control_numbers = (98 - (int(new_iban_string) % 97))
+    if iban_control_numbers == int(iban_param[2:4]):
+        result = True
     return result
 
 def is_iban_valid_mod_formula(iban_param):
@@ -108,7 +153,10 @@ if(iban_number_lenght_checker(iban) == False):
     print("Iban is too short or too long")
 else:
     print("Personal code is from 20 symbols")
-
+if (is_iban_check_numbers_valid(iban) == False):
+    print("Iban check numbers are invalid")
+else:
+    print("Iban check numbers are valid")
 if (iban_symbols_validation(iban) == False):
     print("Something wrong with iban format")
 else:
