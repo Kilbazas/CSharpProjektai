@@ -174,10 +174,10 @@ def what_is_the_country(iban_param):
     result = countries_name
     return result
 
-def is_iban_lithuanian(iban_param):
-    result = False 
+#def is_iban_lithuanian(iban_param):
+#    result = False 
     
-    return result
+#   return result
 
 #def is_lithuanian_bank_code_valid(iban_param):
 #    result = False
