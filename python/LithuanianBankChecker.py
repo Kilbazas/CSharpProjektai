@@ -36,11 +36,6 @@ char_symbol = {'A':'10',
                'Z':'35',
                }
 
-def read_iban_number():
-    iban_number = input("What is your account number? ")
-    iban_number = "".join(iban_number.split()).upper()
-    return print(iban_number)
-
 def iban_number_lenght_checker(iban_param):
     result = False
     if len(iban_param) == 20:
@@ -86,12 +81,6 @@ def is_iban_valid_mod_formula(iban_param):
     iban_as_number = iban_to_number(iban_param)
     iban_as_number = iban_as_number[:-2] + iban_param[2:4]
     if int(iban_as_number) % 97 == 1:
-        result = True
-    return result
-
-def is_iban_lithuanian(iban_param):
-    result = False 
-    if iban_param[0:2] == "LT":
         result = True
     return result
 
