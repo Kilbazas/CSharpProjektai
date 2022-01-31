@@ -76,7 +76,8 @@ def is_iban_check_numbers_valid(iban_param):
         result = True
     return result
 
-def is_iban_valid_mod_formula(iban_param):             
+def is_iban_valid_mod_formula(iban_param):   
+    result = False
     iban_check_code = iban_param[4:] + iban_param[0:4]
     iban_check_code = list(iban_check_code)
     new_iban_string = ""
