@@ -90,20 +90,19 @@ def is_bank_code_valid(iban_param):
         result = True
     return result
 
-def return_bank_name(iban_param):
-    result = ""
-    bank_id_and_name = {'72900':"Citadelė",
-                        '73000':"Swedbank",
-                        '40100':"Luminor", 
-                        '21400':"Nodea", 
-                        '32500':"Revolut", 
-                        '70440':"SEB", 
-                        '72300':"Medicinos bankas", 
-                        '71800':"Šiaulių bankas"}
+def return_bank_name(iban_param): #Should I check for the name, or change function to True of False?
+    bank_id = iban_param[4:9]
+    bank_id_and_name = {'72900': "Citadelė",
+                        '73000': "Swedbank",
+                        '40100': "Luminor",
+                        '21400': "Nodea",
+                        '32500': "Revolut",
+                        '70440': "SEB",
+                        '72300': "Medicinos bankas",
+                        '71800': "Šiaulių bankas"}
 
-    if is_bank_code_valid(iban_param) == True:
-        result = bank_id_and_name.get(iban_param[4:9], 'Not found')
-    return print(result)
+    bank_name = bank_id_and_name.get(bank_id, "Not found")
+    return bank_name
 
 def verify_iban_number(iban):
     if iban == None:
@@ -156,5 +155,6 @@ if verify_iban_number("XS557300010000000036") == "valid":
     print("Something is wrong. Country checker is not working.") #kind of the same test as before
 if verify_iban_number("LT557200010000000036") == "valid":
     print("Something is wrong. Bank code identifier do not work.")
+
 
 print("All tests passed")
