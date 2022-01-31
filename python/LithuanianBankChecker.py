@@ -76,7 +76,7 @@ def is_iban_check_numbers_valid(iban_param):
     iban_as_number = iban_to_number(iban_param)
     iban_control_numbers = (98 - (int(iban_as_number) % 97))
     if iban_control_numbers < 10:
-        Iban_control_numbers = '0'+ str(iban_control_numbers)
+        iban_control_numbers = '0'+ str(iban_control_numbers)
     if int(iban_control_numbers) == int(iban_param[2:4]):
         result = True
     return result
