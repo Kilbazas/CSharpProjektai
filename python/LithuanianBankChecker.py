@@ -59,8 +59,7 @@ def iban_symbols_validation(iban_param):
         result = False
     return result
 
-def is_iban_check_numbers_valid(iban_param):
-    result = False            
+def iban_to_number(iban_param):
     iban_check_code = iban_param[4:] + iban_param[0:2] + '00'
     iban_check_code = list(iban_check_code)
     new_iban_string = ""
@@ -70,24 +69,21 @@ def is_iban_check_numbers_valid(iban_param):
             iban_check_code[char] = value 
     for i in range(len(iban_check_code)):
         new_iban_string = new_iban_string + str(iban_check_code[i])
+    return new_iban_string
 
-    iban_control_numbers = (98 - (int(new_iban_string) % 97))
+def is_iban_check_numbers_valid(iban_param):
+    result = False
+    iban_as_number = iban_to_number(iban_param)
+    iban_control_numbers = (98 - (int(iban_as_number) % 97))
     if iban_control_numbers == int(iban_param[2:4]):
         result = True
     return result
 
 def is_iban_valid_mod_formula(iban_param):   
     result = False
-    iban_check_code = iban_param[4:] + iban_param[0:4]
-    iban_check_code = list(iban_check_code)
-    new_iban_string = ""
-    for char in range(len(iban_check_code)):
-        if iban_check_code[char] in char_symbol:
-            value = char_symbol.get(iban_check_code[char])
-            iban_check_code[char] = value 
-    for i in range(len(iban_check_code)):
-        new_iban_string = new_iban_string + str(iban_check_code[i])
-    if int(new_iban_string) % 97 == 1:
+    iban_as_number = iban_to_number(iban_param)
+    iban_as_number = iban_as_number[:-2] + iban_param[2:4]
+    if int(iban_as_number) % 97 == 1:
         result = True
     return result
 
@@ -147,4 +143,3 @@ if(is_bank_code_valid(iban) == False):
 else:
     print("We can find this bank in the list")
 return_bank_name(iban)
-
