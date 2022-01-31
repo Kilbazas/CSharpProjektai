@@ -79,8 +79,6 @@ def is_iban_check_numbers_valid(iban_param):
         Iban_control_numbers = '0'+ str(iban_control_numbers)
     if int(iban_control_numbers) == int(iban_param[2:4]):
         result = True
-
-
     return result
 
 def is_iban_valid_mod_formula(iban_param):   
