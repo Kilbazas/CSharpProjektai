@@ -35,6 +35,7 @@ char_symbol = {'A':'10',
                'Y':'34',
                'Z':'35',
                }
+
 def read_iban_number():
     iban_number = input("What is your account number? ")
     iban_number = "".join(iban_number.split()).upper()
@@ -115,7 +116,6 @@ def return_bank_name(iban_param):
         result = bank_id_and_name.get(iban_param[4:9], 'Not found')
     return print(result)
 
-
 def verify_iban_number(iban):
     if iban == None:
         return "Input can't be empty."
@@ -123,65 +123,46 @@ def verify_iban_number(iban):
     iban = str(iban)
     iban = "".join(iban.split()).upper()
    
-
     if iban_number_lenght_checker(iban) == False:
         return "Iban is too short or too long."
-
     if iban_symbols_validation(iban) == False:
         return "There is unexpected symbols in your iban number."
-
     if is_iban_check_numbers_valid(iban) == False:
         return "Iban check numbers are invalid."
-
     if is_iban_valid_mod_formula(iban) == False:
         return "Iban is invalid. It didn't pass mod97 algorithm."
-
     if is_iban_lithuanian(iban) == False:
         return "Iban is invalid. It is not Lithuanian bank account."
-
     if is_bank_code_valid(iban) == False:
         return "Iban is invalid. There is no bank in Lithuania with this bank code."
-
     return "valid"
 
 #tests
 
 if verify_iban_number(None) == "valid":
     print("Something is wrong. There is no value entered.")
-
 if verify_iban_number("") == "valid":
     print("Something is wrong. There is zero values entered.")
-
 if verify_iban_number("lt557300010000000036") == False:
     print("Something is wrong. Upper case doesn't work.")
-
 if verify_iban_number("LT55 7300 0100 0000 0036") == False:
     print("Something is wrong. Algorithm does not remove white space.")
-
 if verify_iban_number(int(2129557300010000000036)) == False:
     print("Something is wrong. Algorithm accepts non-string input.")
-
 if verify_iban_number("LT456465") == "valid":
     print("Something is wrong. Iban number is too short.")
-
 if verify_iban_number("LT321321321212123121313132313") == "valid":
     print("Something is wrong. Iban number is too long.")
-
 if verify_iban_number("XS557300010000000036") == "valid":
     print("Something is wrong. Iban number has unexpected symbols.")
-
 if verify_iban_number("LT55730A010000000036") == "valid":
     print("Something is wrong. Iban number has unexpected symbols.")
-
 if verify_iban_number("LT507300010000000036") == "Valid":
     print("Something is wrong. Iban check number is invalid.")
-
 if verify_iban_number("LT557300010000000016") == "valid":
     print("Something is wrong. Mod 97 algorithm does not work.")
-
 if verify_iban_number("XS557300010000000036") == "valid":
     print("Something is wrong. Country checker is not working.") #kind of the same test as before
-
 if verify_iban_number("LT557200010000000036") == "valid":
     print("Something is wrong. Bank code identifier do not work.")
 
