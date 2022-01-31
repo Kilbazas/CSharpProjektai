@@ -8,7 +8,33 @@
     # 3. verify Bank code
     # 4. verify control number
     # 5. Verify bank name
-
+char_symbol = {'A':'10',
+               'B':'11',
+               'C':'12',
+               'D':'13',
+               'E':'14',
+               'F':'15',
+               'G':'16',
+               'H':'17',
+               'I':'18',
+               'J':'19',
+               'K':'20',
+               'L':'21',
+               'M':'22',
+               'N':'23',
+               'O':'24',
+               'P':'25',
+               'Q':'26',
+               'R':'27',
+               'S':'28',
+               'T':'29',
+               'U':'30',
+               'V':'31',
+               'W':'32',
+               'X':'33',
+               'Y':'34',
+               'Z':'35',
+               }
 def read_iban_number():
     iban_number = input("What is your account number? ")
     iban_number = "".join(iban_number.split())
@@ -34,34 +60,7 @@ def iban_symbols_validation(iban_param):
     return result
 
 def is_iban_check_numbers_valid(iban_param):
-    result = False
-    char_symbol = {'A':'10',
-                   'B':'11',
-                   'C':'12',
-                   'D':'13',
-                   'E':'14',
-                   'F':'15',
-                   'G':'16',
-                   'H':'17',
-                   'I':'18',
-                   'J':'19',
-                   'K':'20',
-                   'L':'21',
-                   'M':'22',
-                   'N':'23',
-                   'O':'24',
-                   'P':'25',
-                   'Q':'26',
-                   'R':'27',
-                   'S':'28',
-                   'T':'29',
-                   'U':'30',
-                   'V':'31',
-                   'W':'32',
-                   'X':'33',
-                   'Y':'34',
-                   'Z':'35',
-                   }             
+    result = False            
     iban_check_code = iban_param[4:] + iban_param[0:2] + '00'
     iban_check_code = list(iban_check_code)
     new_iban_string = ""
@@ -77,34 +76,7 @@ def is_iban_check_numbers_valid(iban_param):
         result = True
     return result
 
-def is_iban_valid_mod_formula(iban_param):
-    char_symbol = {'A':'10',
-                   'B':'11',
-                   'C':'12',
-                   'D':'13',
-                   'E':'14',
-                   'F':'15',
-                   'G':'16',
-                   'H':'17',
-                   'I':'18',
-                   'J':'19',
-                   'K':'20',
-                   'L':'21',
-                   'M':'22',
-                   'N':'23',
-                   'O':'24',
-                   'P':'25',
-                   'Q':'26',
-                   'R':'27',
-                   'S':'28',
-                   'T':'29',
-                   'U':'30',
-                   'V':'31',
-                   'W':'32',
-                   'X':'33',
-                   'Y':'34',
-                   'Z':'35',
-                   }             
+def is_iban_valid_mod_formula(iban_param):             
     iban_check_code = iban_param[4:] + iban_param[0:4]
     iban_check_code = list(iban_check_code)
     new_iban_string = ""
