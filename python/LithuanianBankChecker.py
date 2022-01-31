@@ -75,8 +75,12 @@ def is_iban_check_numbers_valid(iban_param):
     result = False
     iban_as_number = iban_to_number(iban_param)
     iban_control_numbers = (98 - (int(iban_as_number) % 97))
-    if iban_control_numbers == int(iban_param[2:4]):
+    if iban_control_numbers < 10:
+        Iban_control_numbers = '0'+ str(iban_control_numbers)
+    if int(iban_control_numbers) == int(iban_param[2:4]):
         result = True
+
+
     return result
 
 def is_iban_valid_mod_formula(iban_param):   
@@ -105,7 +109,7 @@ def return_bank_name(iban_param):
                         '73000':"Swedbank",
                         '40100':"Luminor", 
                         '21400':"Nodea", 
-                        '39200':"Revolut", 
+                        '32500':"Revolut", 
                         '70440':"SEB", 
                         '72300':"Medicinos bankas", 
                         '71800':"Šiaulių bankas"}
