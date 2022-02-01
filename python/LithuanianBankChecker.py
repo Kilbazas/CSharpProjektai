@@ -131,11 +131,11 @@ if verify_iban_number(None) == "valid":
     print("Something is wrong. There is no value entered.")
 if verify_iban_number("") == "valid":
     print("Something is wrong. There is zero values entered.")
-if verify_iban_number("lt557300010000000036") == False:
+if verify_iban_number("lt557300010000000036") == "valid":
     print("Something is wrong. Upper case doesn't work.")
-if verify_iban_number("LT55 7300 0100 0000 0036") == False:
+if verify_iban_number("LT55 7300 0100 0000 0036") == "valid":
     print("Something is wrong. Algorithm does not remove white space.")
-if verify_iban_number(int(2129557300010000000036)) == False:
+if verify_iban_number(int(2129557300010000000036)) == "valid":
     print("Something is wrong. Algorithm accepts non-string input.")
 if verify_iban_number("LT456465") == "valid":
     print("Something is wrong. Iban number is too short.")
