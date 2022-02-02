@@ -11,13 +11,9 @@
     # 7. verify day
     # 8. verify last number
 
-    
-def read_personal_code():
-    person_code = input("What is your personal code? ")
-    return person_code
-
 def personal_code_lenght_checker(person_code_param):
     result = False
+    person_code_param = str(person_code_param)
     if len(person_code_param) == 11:
         result = True
     return result
@@ -28,7 +24,7 @@ def is_entered_personal_code_is_woman_or_man(person_code_param):
         result = 0
     if person_code_param[0] == '2' or person_code_param[0] == '4' or person_code_param[0] == '6':
         result = 1
-    if (person_code_param[0] != '1' and person_code_param[0] != '3' and person_code_param[0] != '5' and person_code_param[0] != '2' and person_code_param[0] != '4' and person_code_param[0] != '6'): 
+    if (person_code_param[0] != '1' or person_code_param[0] != '3' or person_code_param[0] != '5' or person_code_param[0] != '2' or person_code_param[0] != '4' or person_code_param[0] != '6'): 
         result = 2
     return result
 
@@ -45,6 +41,7 @@ def get_birth_date_from_personal_code(person_code_param):
     return person_code_param[0:7] 
 
 def what_year_is_it(person_code_param):
+    year = 5
     birth_date = get_birth_date_from_personal_code(person_code_param)
     input_first_number = birth_date[0]
     if input_first_number == '1' or input_first_number == '2':
@@ -53,8 +50,8 @@ def what_year_is_it(person_code_param):
         year = "19" + str(birth_date[1:3])
     if input_first_number == '5' or input_first_number == '6':
         year = "20" + str(birth_date[1:3])
-    year = int(year)
-    return year
+    return int(year)
+
 
 def is_entered_personal_code_is_leaf_year(person_code_param):
     result = False
@@ -130,57 +127,94 @@ def is_person_isnt_too_young(person_code_param):
         result = True
     return result
 
+def verify_personal_code(personal_code):
+    if personal_code == None:
+        return "Input can not be empty"
+    if personal_code == "":
+        return "Input can not be empty"
+
+    #personal_code = int(personal_code)
+    personal_code = "".join(personal_code.split())
+
+    if personal_code_lenght_checker(personal_code) == False:
+        return "Personal code is too short or too long."
+    if is_entered_personal_code_is_number(personal_code) == False:
+        return "Personal code has unexpected symbols. It must be a number."
+    if is_entered_personal_code_is_woman_or_man(personal_code) == 2:
+        return "Personal code is incorrect. We can not identify the first symbol."
+    if is_entered_personal_code_month_is_in_range(personal_code) == False:
+        return "Personal code is incorrect. You entered wrong month"
+    if is_entered_personal_code_day_is_in_range(personal_code) == False:
+        return "Personal code is incorrect. You entered wrong month."
+    if is_last_number_of_personal_code_is_legit(personal_code) == False:
+        return "Personal code is incorrect. Last number is not confirmed."
+    if is_person_isnt_too_old(personal_code) == False:
+        return "There is no human alive that old..."
+    if is_person_isnt_too_young(personal_code) == False:
+        return "Come back after your birthday..."
+
+    return "valid"
 
 #unit tests
 
-personal_code = read_personal_code()
 
-if(personal_code_lenght_checker(personal_code) == False):
+if personal_code_lenght_checker(None) == "valid":
+    print("Personal ca not be none")
+
+if personal_code_lenght_checker("") == "valid":
+    print("Personal code can not be empty string")
+
+if personal_code_lenght_checker("396012400400") == "valid":
     print("Personal code is too short or too long")
-else:
-    print("Personal code is from 11 digits")
 
-if(is_entered_personal_code_is_woman_or_man(personal_code) == 1):
-    print("Person is woman")
-    
-if(is_entered_personal_code_is_woman_or_man(personal_code) == 0):
-    print("Person is Man")
+if personal_code_lenght_checker("39601240000") == "valid":
+    print("Personal code is too short or too long")
 
-if(is_entered_personal_code_is_woman_or_man(personal_code) == 2):
-    print("Wrong")
+if is_entered_personal_code_is_woman_or_man("89601240040") == "valid":
+    print("Personal code is wrong.")
 
-if(is_entered_personal_code_is_number(personal_code)):
-    print("Personal code is number")
+if is_entered_personal_code_is_number("3A601240040") == "valid":
+    print("Personal code is wrong. Unexpected characters detected")
 
-if(is_entered_personal_code_is_number(personal_code) !=  True):
-    print("Wrong its not number")
+if is_entered_personal_code_is_number(39601240040) == "valid":
+    print("Personal code is wrong. Unexpected characters detected")
 
-if(is_entered_personal_code_month_is_in_range(personal_code) == True):
-   print("Entered personal code month is in range")
-else:
-   print("Entered personal code month is not in range")
+if is_entered_personal_code_is_number("3.601240040") == "valid":
+    print("Personal code is wrong. Unexpected characters detected")
+
+if is_entered_personal_code_month_is_in_range("39613240040") == "valid":
+   print("Personal code is wrong. Month is not in range")
+
+if is_entered_personal_code_month_is_in_range("39600240040") == "valid":
+   print("Personal code is wrong. Month is not in range")
    
-if(is_entered_personal_code_day_is_in_range(personal_code) == True):
-    print("Entered personal code day is in range")
-else:
-    print("Entered personal code day is not in range")
-if(is_last_number_of_personal_code_is_legit(personal_code) == True):
-    print("last number is legit")
-else:
-    print("last number is not legit")
-if(is_last_number_is_exeption_for_no_birth_date(personal_code) == True):
-    print("Personal number has an exeption")
-else:
-    print("There is no exeptions")
-if(is_last_number_is_exeptional(personal_code) == True):
-    print("Personal code is exeptional")
-else:
-    print("Personal code is regular")
-if(is_person_isnt_too_old(personal_code) == True):
-    print("Person isn't too old")
-else:
+if is_entered_personal_code_day_is_in_range("39601000040") == "valid":
+    print("Personal code is wrong. Entered personal code day is not in range")
+
+if is_entered_personal_code_day_is_in_range("39601440040") == "valid":
+    print("Personal code is wrong. Entered personal code day is not in range")
+
+#if(is_last_number_of_personal_code_is_legit("39601240041") == "valid"):
+    #print("Personal code is wrong. Last number is not legit")
+
+#if(is_last_number_is_exeption_for_no_birth_date(personal_code) == True):
+#    print("Personal number has an exeption")
+#else:
+#    print("There is no exeptions")
+#if(is_last_number_is_exeptional(personal_code) == True):
+#    print("Personal code is exeptional")
+#else:
+#    print("Personal code is regular")
+if(is_person_isnt_too_old("17901240040") == "valid"):
     print("Person is too old")
-if(is_person_isnt_too_young(personal_code) == True):
-    print("Person isn't too young")
-else:
+
+if(is_person_isnt_too_old("27901240040") == "valid"):
+    print("Person is too old")
+
+if(is_person_isnt_too_young("59601240040") == "valid"):
     print("Person is too young")
+
+if(is_person_isnt_too_young("69601240040") == "valid"):
+    print("Person is too young")
+
+print("All tests passed")
