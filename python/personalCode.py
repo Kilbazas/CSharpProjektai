@@ -30,8 +30,8 @@ def is_entered_personal_code_is_woman_or_man(person_code_param):
 
 def is_entered_personal_code_is_number(person_code_param):
     result = True
-    n = len(person_code_param)
-    for x in range(n):
+    person_code_param = str(person_code_param)
+    for x in range(len(person_code_param)):
         if(ord(person_code_param[x]) < 48 or ord(person_code_param[x]) > 57): 
             result = False
             break
@@ -133,7 +133,7 @@ def verify_personal_code(personal_code):
     if personal_code == "":
         return "Input can not be empty"
 
-    #personal_code = int(personal_code)
+    personal_code = str(personal_code)
     personal_code = "".join(personal_code.split())
 
     if personal_code_lenght_checker(personal_code) == False:
