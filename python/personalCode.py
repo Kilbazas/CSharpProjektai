@@ -204,7 +204,7 @@ if  verify_personal_code("39602290047") == False:
 if  verify_personal_code("99601400040") == False:
     print("Personal code day checker does not work. If code starts with 9 case.")
 
-if  verify_personal_code("39601240043") == "valid": #logika is not found
+if  verify_personal_code("39601240043") == "valid": #logika is not found 49601240043, 39601240043, 19601240043, 2960124004 pass...
     print("Personal code last number checker does't work.")
 
 if  verify_personal_code("17901240040") == "valid":
