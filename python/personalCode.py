@@ -1,15 +1,3 @@
-# our task is to implement peron coder validator
-# what is the first step?
-# algorithm steps:
-    # 1. read user input
-    # 1.1. verify lengh of input (missing)
-    # 2. verify man or woman
-    # 3. verify is number
-    # 4. get birth date
-    # 5. verify leaf year
-    # 6. verify month
-    # 7. verify day
-    # 8. verify last number
 
 def personal_code_lenght_checker(person_code_param):
     result = False
@@ -116,6 +104,7 @@ def is_last_number_of_personal_code_is_legit(person_code_param):
         result = True
     if is_personal_code_exeptional(person_code_param) == True:
         result = True
+    print(f"Input: {input_last_number}, last number: {last_number}, result: {result}")
     return result 
 
 def is_person_isnt_too_old(person_code_param):
@@ -168,7 +157,7 @@ if  verify_personal_code(None) == "valid":
 if  verify_personal_code("") == "valid":
     print("Personal code input can not be empty.")
 
-if  verify_personal_code("3 9 6 0124 00 40") == "valid": #Logika is not found.
+if  verify_personal_code("3 9 6 0124 00 40") == "valid": #Logika is not found. Ar reiktu tikrint FALSE?
     print("Method join does not work.")
 
 if  verify_personal_code("396012400400") == "valid":
@@ -205,7 +194,7 @@ if  verify_personal_code("99601400040") == False:
     print("Personal code day checker does not work. If code starts with 9 case.")
 
 if  verify_personal_code("39601240043") == "valid": #logika is not found 49601240043, 39601240043, 19601240043, 2960124004 pass...
-    print("Personal code last number checker does't work.")
+    print(f"Personal code last number checker does't work. ")
 
 if  verify_personal_code("17901240040") == "valid":
     print("Person is too old")
@@ -220,3 +209,8 @@ if  verify_personal_code("69601240040") == "valid":
     print("Person is too young")
 
 print("All tests passed")
+
+
+
+
+
