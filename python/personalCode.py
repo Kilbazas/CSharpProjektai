@@ -209,7 +209,10 @@ if  verify_personal_code("69601240040") == "valid":
     print("Person is too young")
 
 print("All tests passed")
-
+if is_last_number_of_personal_code_is_legit("39601240043") == False:
+    (print("Rezultatas false"))
+if is_last_number_of_personal_code_is_legit("39601240043") == True:
+    (print("Rezultatas tru"))
 
 
 
