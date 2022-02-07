@@ -104,7 +104,6 @@ def is_last_number_of_personal_code_is_legit(person_code_param):
         result = True
     if is_personal_code_exeptional(person_code_param) == True:
         result = True
-    print(f"Input: {input_last_number}, last number: {last_number}, result: {result}")
     return result 
     
 def is_person_isnt_too_old(person_code_param):
@@ -128,23 +127,24 @@ def verify_personal_code(personal_code):
         return "Input can not be empty"
 
     personal_code = str(personal_code)
-    personal_code = "".join(personal_code.split())
-
-    if personal_code_lenght_checker(personal_code) == False:
+    input = "".join(personal_code.split())
+    if personal_code != input:
+        return "Personal code should be written without spaces"
+    if personal_code_lenght_checker(input) == False:
         return "Personal code is too short or too long."
-    if is_entered_personal_code_is_number(personal_code) == False:
+    if is_entered_personal_code_is_number(input) == False:
         return "Personal code has unexpected symbols. It must be a number."
-    if is_entered_personal_code_first_number_valid(personal_code) == False:
+    if is_entered_personal_code_first_number_valid(input) == False:
         return "Personal code first number is incorrect."
-    if is_entered_personal_code_month_is_in_range(personal_code) == False:
+    if is_entered_personal_code_month_is_in_range(input) == False:
         return "Personal code month is not in range."
-    if is_entered_personal_code_day_is_in_range(personal_code) == False:
+    if is_entered_personal_code_day_is_in_range(input) == False:
         return "Personal code day is not in range."
-    if is_last_number_of_personal_code_is_legit(personal_code) == False:
-        "Personal code is invalid. Last number is not comfirmed."
-    if is_person_isnt_too_old(personal_code) == False:
+    if is_last_number_of_personal_code_is_legit(input) == False:
+        return "Personal code is invalid. Last number is not comfirmed."
+    if is_person_isnt_too_old(input) == False:
         return "There is no human alive that old..."
-    if is_person_isnt_too_young(personal_code) == False:
+    if is_person_isnt_too_young(input) == False:
         return "Come back after your birthday..."
 
     return "valid"
@@ -193,7 +193,7 @@ if  verify_personal_code("39602290047") == False:
 if  verify_personal_code("99601400040") == False:
     print("Personal code day checker does not work. If code starts with 9 case.")
 
-if  verify_personal_code("39601240043") == "valid": #logika is not found 49601240043, 39601240043, 19601240043, 2960124004 pass...
+if  verify_personal_code("39601240043") == "valid":
     print(f"Personal code last number checker does't work. ")
 
 if  verify_personal_code("17901240040") == "valid":
@@ -209,11 +209,6 @@ if  verify_personal_code("69601240040") == "valid":
     print("Person is too young")
 
 print("All tests passed")
-if is_last_number_of_personal_code_is_legit("39601240043") == False:
-    (print("Rezultatas false"))
-if is_last_number_of_personal_code_is_legit("39601240043") == True:
-    (print("Rezultatas tru"))
-
 
 
 
