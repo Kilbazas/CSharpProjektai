@@ -106,7 +106,7 @@ def is_last_number_of_personal_code_is_legit(person_code_param):
         result = True
     print(f"Input: {input_last_number}, last number: {last_number}, result: {result}")
     return result 
-
+    
 def is_person_isnt_too_old(person_code_param):
     result = False
     year = what_year_is_it(person_code_param)
