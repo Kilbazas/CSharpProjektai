@@ -93,9 +93,7 @@ def number_case(integer):
         elif int(number_value) > 10 and number_value[1] != "0" and number_value[1] != "1":
             number_case = "2" 
 
-
     return number_case
-
 
 
 def one_to_hundred_excepted(integer): #1 - 99
@@ -185,7 +183,6 @@ def suma_zodziais(integer): #1 000 000 - 999 999 999
         if number_as_string[3:] == "000000":
             return hundred_to_thousand_excepted(number_as_string[0:3]) + " " + millions.get(millions_value)
         return thousand_to_million_excepted(number_as_string[0:3]) + " " + millions.get(millions_value) + " " + thousand_to_million_excepted(number_as_string[3:])
-
 
 
 print(suma_zodziais(513121554))
