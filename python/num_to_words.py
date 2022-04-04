@@ -158,6 +158,7 @@ def thousand_to_million_excepted(integer): #1000 - 999999
             return hundred_to_thousand_excepted(number_as_string[:3]) + " " + thousands.get(thousands_value)
         return hundred_to_thousand_excepted(number_as_string[:3]) + " " + thousands.get(thousands_value) + " " + hundred_to_thousand_excepted(number_as_string[3:])
     
+    return "not implemented"
 
 def suma_zodziais(integer): #1 000 000 - 999 999 999
     integer = int(integer)
@@ -184,6 +185,7 @@ def suma_zodziais(integer): #1 000 000 - 999 999 999
             return hundred_to_thousand_excepted(number_as_string[0:3]) + " " + millions.get(millions_value)
         return thousand_to_million_excepted(number_as_string[0:3]) + " " + millions.get(millions_value) + " " + thousand_to_million_excepted(number_as_string[3:])
 
+    return "not implemented"
 
 print(suma_zodziais(513121554))
 
