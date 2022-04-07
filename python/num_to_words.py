@@ -63,34 +63,38 @@ def number_case(integer):
     integer = int(integer)
     number_as_string = str(integer)
     number_length = len(number_as_string)
-    number_value = 0
     number_case = "4"
 
+
     if number_length == 4 or number_length == 7: #1000 or 1 000 000
-        number_value = number_as_string[0]
-        if 1 < int(number_value) < 10:
+        number_value_for_thousand_and_million = int(number_as_string[0])
+        if 1 < number_value_for_thousand_and_million < 10:
             number_case = "2"
         else:
             number_case = "1"
 
     if number_length == 5 or number_length == 8: #10 000 or 10 000 000
         number_value = number_as_string[0:2]
-        if 9 < int(number_value) < 21:
+        number_value_for_decimals = int(number_as_string[0:2])
+
+        if 9 < number_value_for_decimals < 21:
             number_case = "3"
-        elif int(number_value[1]) == 1 and int(number_value) > 11:
+        elif number_as_string[1] == "1" and number_value_for_decimals  > 11:
             number_case = "1"
-        elif int(number_value) > 10 and number_value[1] != "0" and number_value[1] != "1":
+        elif number_value_for_decimals  > 10 and number_value[1] != "0" and number_value[1] != "1":
             number_case = "2"
-        elif int(number_value) > 10:
+        elif number_value_for_decimals  > 10:
             number_case = "3"
     
-    if number_length == 9 or number_length == 6:
+    if  number_length == 6 or number_length == 9: #100 000 or 100 000 000
         number_value = number_as_string[0:3]
+        number_value_for_hundreds = int(number_value)
+        
         if number_value[1:] == "00" or number_value[2] == "0" or 9 < int(number_value[1:]) < 20:
             number_case = "3"
         elif number_value[1] != "1" and number_value[2] == "1":
             number_case = "1"
-        elif int(number_value) > 10 and number_value[1] != "0" and number_value[1] != "1":
+        elif number_value_for_hundreds > 10 and number_value[1] != "0" and number_value[1] != "1":
             number_case = "2" 
 
     return number_case
